@@ -59,25 +59,6 @@ uart_config_t IDFUARTComponent::get_config_() {
       break;
   }
 
-  uart_mode_t uart_mode;
-  switch (this->uart_mode_) {
-    case UART_CONFIG_MODE_UART:
-      uart_mode = UART_MODE_UART;
-      break;
-    case UART_CONFIG_MODE_RS485_HALF_DUPLEX:
-      uart_mode = UART_MODE_RS485_HALF_DUPLEX;
-      break;
-    case UART_CONFIG_MODE_RS485_COLLISION_DETECT:
-      uart_mode = UART_MODE_RS485_COLLISION_DETECT;
-      break;
-    case UART_CONFIG_MODE_RS485_APP_CTRL:
-      uart_mode = UART_MODE_RS485_APP_CTRL;
-      break;
-    default:
-      uart_mode = UART_MODE_UART;
-      break;
-  }
-
   uart_config_t uart_config;
   uart_config.baud_rate = this->baud_rate_;
   uart_config.data_bits = data_bits;
@@ -150,6 +131,25 @@ void IDFUARTComponent::setup() {
     ESP_LOGW(TAG, "uart_set_line_inverse failed: %s", esp_err_to_name(err));
     this->mark_failed();
     return;
+  }
+
+  uart_mode_t uart_mode;
+  switch (this->uart_mode_) {
+    case UART_CONFIG_MODE_UART:
+      uart_mode = UART_MODE_UART;
+      break;
+    case UART_CONFIG_MODE_RS485_HALF_DUPLEX:
+      uart_mode = UART_MODE_RS485_HALF_DUPLEX;
+      break;
+    case UART_CONFIG_MODE_RS485_COLLISION_DETECT:
+      uart_mode = UART_MODE_RS485_COLLISION_DETECT;
+      break;
+    case UART_CONFIG_MODE_RS485_APP_CTRL:
+      uart_mode = UART_MODE_RS485_APP_CTRL;
+      break;
+    default:
+      uart_mode = UART_MODE_UART;
+      break;
   }
 
   err = uart_set_mode(this->uart_num_, uart_mode);
