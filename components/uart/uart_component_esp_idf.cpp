@@ -133,7 +133,7 @@ void IDFUARTComponent::setup() {
     return;
   }
 
-  err = uart_set_mode(this->uart_num_, this=>uart_mode_);
+  err = uart_set_mode(this->uart_num_, this->uart_mode_);
   if (err != ESP_OK) {
     ESP_LOGW(TAG, "uart_set_mode failed: %s", esp_err_to_name(err));
     this->mark_failed();
