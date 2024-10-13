@@ -111,6 +111,16 @@ UART_HW_FLOWCTRL_OPTIONS = {
     "MAX": UARTHardwareFlowControl.UART_CONFIG_HW_FLOWCTRL_MAX,
 }
 
+CONF_UART_MODE = "mode"
+UARTMode = uart_ns.enum("UARTMode")
+UART_MODES = {
+    "UART": UARTMode.UART_MODE_UART,
+    "RS485_HD": UARTMode.UART_MODE_RS485_HALF_DUPLEX,
+    "IRDA": UARTMode.UART_MODE_IRDA,
+    "RS485_CD": UARTMode.UART_MODE_RS485_COLLISION_DETECT,
+    "RS485_AC": UARTMode.UART_MODE_RS485_APP_CTRL,
+}
+
 CONF_STOP_BITS = "stop_bits"
 CONF_DATA_BITS = "data_bits"
 CONF_PARITY = "parity"
@@ -191,6 +201,9 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_INVERT): cv.invalid(
                 "This option has been removed. Please instead use invert in the tx/rx pin schemas."
             ),
+            cv.Optional(CONF_UART_MODE, default="UART"): cv.enum(
+                UART_MODES, upper=True
+            ),
             cv.Optional(CONF_DEBUG): maybe_empty_debug,
         }
     ).extend(cv.COMPONENT_SCHEMA),
@@ -248,6 +261,7 @@ async def to_code(config):
     cg.add(var.set_data_bits(config[CONF_DATA_BITS]))
     cg.add(var.set_parity(config[CONF_PARITY]))
     cg.add(var.set_hw_flowctrl(config[CONF_HW_FLOWCTRL]))
+    cg.add(var.set_uart_mode(config[CONF_UART_MODE]))
 
     if CONF_DEBUG in config:
         await debug_to_code(config[CONF_DEBUG], var)

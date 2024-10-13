@@ -10,7 +10,7 @@ namespace uart {
 static const char *const TAG = "uart";
 
 void UARTDevice::check_uart_settings(uint32_t baud_rate, uint8_t stop_bits, UARTParityOptions parity,
-                                     uint8_t data_bits, UARTHardwareFlowControl hw_flowctrl) {
+                                     uint8_t data_bits, UARTHardwareFlowControl hw_flowctrl, UARTMode uart_mode) {
   if (this->parent_->get_baud_rate() != baud_rate) {
     ESP_LOGE(TAG, "  Invalid baud_rate: Integration requested baud_rate %u but you have %u!", baud_rate,
              this->parent_->get_baud_rate());
@@ -30,6 +30,10 @@ void UARTDevice::check_uart_settings(uint32_t baud_rate, uint8_t stop_bits, UART
   if (this->parent_->get_hw_flowctrl() != hw_flowctrl) {
     ESP_LOGE(TAG, "  Invalid hw_flowctrl: Integration requested hw_flowctrl %s but you have %s!",
              LOG_STR_ARG(hw_flowctrl_to_str(hw_flowctrl)), LOG_STR_ARG(hw_flowctrl_to_str(this->parent_->get_hw_flowctrl())));
+  }
+  if (this->parent_->get_uart_mode() != uart_mode) {
+    ESP_LOGE(TAG, "  Invalid uart_mode: Integration requested uart_mode %s but you have %s!",
+             LOG_STR_ARG(uart_mode_to_str(uart_mode)), LOG_STR_ARG(uart_mode_to_str(this->parent_->get_uart_mode())));
   }
 }
 
@@ -58,6 +62,23 @@ const LogString *hw_flowctrl_to_str(UARTHardwareFlowControl hw_flowctrl) {
       return LOG_STR("CTS_RTS");
     case UART_CONFIG_HW_FLOWCTRL_MAX:
       return LOG_STR("MAX");
+    default:
+      return LOG_STR("UNKNOWN");
+  }
+}
+
+const LogString *uart_mode_to_str(UARTMode uart_mode) {
+  switch (uart_mode) {
+    case UART_MODE_UART:
+      return LOG_STR("UART");
+    case UART_MODE_RS485_HALF_DUPLEX:
+      return LOG_STR("HALF_DUPLEX");
+    case UART_MODE_IRDA:
+      return LOG_STR("IRDA");
+    case UART_MODE_RS485_COLLISION_DETECT:
+      return LOG_STR("COLLISION_DETECT");
+    case ART_MODE_RS485_APP_CTRL:
+      return LOG_STR("APP_CTRL");
     default:
       return LOG_STR("UNKNOWN");
   }

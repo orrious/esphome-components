@@ -37,7 +37,16 @@ enum UARTHardwareFlowControl {
   UART_CONFIG_HW_FLOWCTRL_MAX
 };
 
+enum UARTMode {
+  UART_MODE_UART,
+  UART_MODE_RS485_HALF_DUPLEX,
+  UART_MODE_IRDA,
+  UART_MODE_RS485_COLLISION_DETECT,
+  ART_MODE_RS485_APP_CTRL,
+};
+
 const LogString *hw_flowctrl_to_str(UARTHardwareFlowControl hw_flowctrl);
+const LogString *uart_mode_to_str(UARTMode uart_mode);
 
 class UARTComponent {
  public:
@@ -65,7 +74,6 @@ class UARTComponent {
   void set_rts_pin(InternalGPIOPin *rts_pin) { this->rts_pin_ = rts_pin; }
   void set_rx_buffer_size(size_t rx_buffer_size) { this->rx_buffer_size_ = rx_buffer_size; }
   size_t get_rx_buffer_size() { return this->rx_buffer_size_; }
-
   void set_stop_bits(uint8_t stop_bits) { this->stop_bits_ = stop_bits; }
   uint8_t get_stop_bits() const { return this->stop_bits_; }
   void set_data_bits(uint8_t data_bits) { this->data_bits_ = data_bits; }
@@ -76,6 +84,8 @@ class UARTComponent {
   UARTHardwareFlowControl get_hw_flowctrl() const { return this->hw_flowctrl_; }
   void set_baud_rate(uint32_t baud_rate) { baud_rate_ = baud_rate; }
   uint32_t get_baud_rate() const { return baud_rate_; }
+  void set_uart_mode(UARTMode uart_mode) { this->uart_mode_ = uart_mode; }
+  UARTMode get_uart_mode() const { return this->uart_mode_; }
 
 #ifdef USE_UART_DEBUGGER
   void add_debug_callback(std::function<void(UARTDirection, uint8_t)> &&callback) {
@@ -97,6 +107,7 @@ class UARTComponent {
   uint8_t data_bits_;
   UARTParityOptions parity_;
   UARTHardwareFlowControl hw_flowctrl_;
+  UARTMode uart_mode_;
 #ifdef USE_UART_DEBUGGER
   CallbackManager<void(UARTDirection, uint8_t)> debug_callback_{};
 #endif
