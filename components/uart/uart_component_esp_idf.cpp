@@ -158,7 +158,7 @@ void IDFUARTComponent::dump_config() {
   ESP_LOGCONFIG(TAG, "  Parity: %s", LOG_STR_ARG(parity_to_str(this->parity_)));
   ESP_LOGCONFIG(TAG, "  Stop bits: %u", this->stop_bits_);
   ESP_LOGCONFIG(TAG, "  Hardware Flow Control: %s", LOG_STR_ARG(hw_flowctrl_to_str(this->hw_flowctrl_)));
-  ESP_LOGCONFIG(TAG, "  Mode: %s", LOG_STR_ARG(uart_mode_to_str(this->uart_mode_));
+  ESP_LOGCONFIG(TAG, "  Mode: %s", LOG_STR_ARG(uart_mode_to_str(this->uart_mode_)));
   this->check_logger_conflict();
 }
 
