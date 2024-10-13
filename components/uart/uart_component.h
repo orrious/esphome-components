@@ -42,7 +42,7 @@ enum UARTMode {
   UART_MODE_RS485_HALF_DUPLEX,
   UART_MODE_IRDA,
   UART_MODE_RS485_COLLISION_DETECT,
-  ART_MODE_RS485_APP_CTRL,
+  UART_MODE_RS485_APP_CTRL,
 };
 
 const LogString *hw_flowctrl_to_str(UARTHardwareFlowControl hw_flowctrl);
