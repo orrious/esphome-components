@@ -64,7 +64,7 @@ class UARTDevice {
   void check_uart_settings(uint32_t baud_rate, uint8_t stop_bits = 1,
                            UARTParityOptions parity = UART_CONFIG_PARITY_NONE, uint8_t data_bits = 8, 
                            UARTHardwareFlowControl hw_flowctrl = UART_CONFIG_HW_FLOWCTRL_DISABLE,
-                           UARTMode uart_mode = UART_MODE_UART);
+                           UARTMode uart_mode = UART_CONFIG_MODE_UART);
 
  protected:
   UARTComponent *parent_{nullptr};

@@ -69,15 +69,15 @@ const LogString *hw_flowctrl_to_str(UARTHardwareFlowControl hw_flowctrl) {
 
 const LogString *uart_mode_to_str(UARTMode uart_mode) {
   switch (uart_mode) {
-    case UART_MODE_UART:
+    case UART_CONFIG_MODE_UART:
       return LOG_STR("UART");
-    case UART_MODE_RS485_HALF_DUPLEX:
+    case UART_CONFIG_MODE_RS485_HALF_DUPLEX:
       return LOG_STR("HALF_DUPLEX");
-    case UART_MODE_IRDA:
+    case UART_CONFIG_MODE_IRDA:
       return LOG_STR("IRDA");
-    case UART_MODE_RS485_COLLISION_DETECT:
+    case UART_CONFIG_MODE_RS485_COLLISION_DETECT:
       return LOG_STR("COLLISION_DETECT");
-    case UART_MODE_RS485_APP_CTRL:
+    case UART_CONFIG_MODE_RS485_APP_CTRL:
       return LOG_STR("APP_CTRL");
     default:
       return LOG_STR("UNKNOWN");
