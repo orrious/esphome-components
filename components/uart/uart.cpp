@@ -77,7 +77,7 @@ const LogString *uart_mode_to_str(UARTMode uart_mode) {
       return LOG_STR("IRDA");
     case UART_MODE_RS485_COLLISION_DETECT:
       return LOG_STR("COLLISION_DETECT");
-    case ART_MODE_RS485_APP_CTRL:
+    case UART_MODE_RS485_APP_CTRL:
       return LOG_STR("APP_CTRL");
     default:
       return LOG_STR("UNKNOWN");
