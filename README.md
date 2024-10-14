@@ -18,7 +18,7 @@ external_components:
 
 ### 2.1. `uart`
 
-This is a customized version of the [`uart`](https://esphome.io/components/uart.html) component which allows the use of hardware flow control and allows uart mode to be set for ESP32 boards.  This enables the ability to use ADM483 / MAX485 chips directly.  
+This is a customized version of the [`uart`](https://esphome.io/components/uart.html) component which allows the use of hardware flow control (thanks to shawly) and allows uart mode to be set for ESP32 boards.  This enables the ability to use ADM483 / MAX485 chips directly.  
 **You can only use this with the [ESP-IDF framework](https://esphome.io/components/esp32.html#esp32-espidf-framework) and ESP32 boards!**
 
 #### 2.1.1. Example
