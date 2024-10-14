@@ -61,7 +61,8 @@ uart:
   tx_pin: GPIO17
   rx_pin: GPIO18
   rts_pin: GPIO19
-# cts_pin: GPIO5
+# cts_pin: GPIO20
+
   # possible values are
   # - DISABLE = disable hardware flow control
   # - RTS = enable RX hardware flow control (rts)
@@ -69,6 +70,7 @@ uart:
   # - CTS_RTS = enable hardware flow control
   # - MAX = ?
   hw_flowctrl: DISABLE
+
   # UART mode selection - Values:
   # - UART     :regular UART mode
   # - RS485_HD :half duplex RS485 UART mode control by RTS pin
@@ -76,6 +78,7 @@ uart:
   # - RS485_AC :application control RS485 UART mode (used for test purposes)
   # - IRDA     :IRDA UART mode
   mode: RS485_HD
+  
   debug:
     # this is just for debugging
     direction: BOTH
