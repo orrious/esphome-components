@@ -22,7 +22,7 @@ This is a customized version of the [`uart`](https://esphome.io/components/uart.
 **You can only use this with the [ESP-IDF framework](https://esphome.io/components/esp32.html#esp32-espidf-framework) and ESP32 boards!**
 
 #### 2.1.1. Example
-
+```
         VCC ---------------+
                            |
                    +-------x-------+
@@ -36,7 +36,7 @@ ESP                |               |     RS485 bus side
                    +-------x-------+
                            |
                           GND
-
+```
 
 ```yaml
 # required
